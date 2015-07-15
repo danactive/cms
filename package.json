@@ -1,0 +1,25 @@
+{
+  "name": "cms",
+  "version": "0.1.0",
+  "description": "Content Management System that connects to third party APIs like Facebook, Twitter, and Flickr",
+  "main": "index.js",
+  "scripts": {
+    "harness": "node ./node_modules/tuxharness/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "CMS",
+    "API",
+    "Facebook",
+    "Twitter",
+    "Flickr"
+  ],
+  "author": "Dan BROOKS",
+  "license": "MIT",
+  "devDependencies": {
+    "tuxharness": "^2.0.2"
+  },
+  "dependencies": {
+    "dustjs-linkedin": "^2.7.2"
+  }
+}

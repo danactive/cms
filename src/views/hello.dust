@@ -1,0 +1,7 @@
+<h1>Hello Fruits</h1>
+
+<ol>
+	{#fruits}
+		<li>{.}</li>
+	{/fruits}
+</ol>
