@@ -7,7 +7,19 @@ server.connection({
     port: 8000 
 });
 
-// Add the route
+// Add the routes
+
+server.route({
+    method: 'GET',
+    path: '/{param*}',
+    handler: {
+        directory: {
+            path: 'public',
+            listing: true
+        }
+    }
+});
+
 server.route({
     method: 'GET',
     path:'/hello', 
