@@ -4,3 +4,7 @@ var credentials = {
  		"api_key": '671aab1520e2cb69e08dd36a5f40213b'
  	}
 };
+
+if (typeof module !== "undefined") { // server JS
+	module.exports = credentials;
+}

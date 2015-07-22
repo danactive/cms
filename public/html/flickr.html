@@ -50,10 +50,10 @@
             "success": function (response) {
                 var photoHtml = "";
                 $.each(response.photos.photo, function (x, photo) {
-                    photoHtml += '<img src="';
+                    photoHtml += '<div><img src="';
                     // https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
                     photoHtml += "https://farm" + photo.farm + ".staticflickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + ".jpg";
-                    photoHtml += '">';
+                    photoHtml += '">' + photo.title + '</div>';
                 });
                 $('body').append(photoHtml);
             }
