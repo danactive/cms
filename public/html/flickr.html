@@ -31,6 +31,25 @@
         5) Stage a local commit to Git
         */
     </script>
-
+    <!-- Flickr API global variables -->
+    <script src="../js/credentials.js"></script>
+    <!-- jQuery library -->
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <!-- Page specic code -->
+    <script>
+        $.ajax({
+            "url": 'https://api.flickr.com/services/rest/',
+            "data": {
+                "method": 'flickr.photos.search',
+                "api_key": credentials.flickr.api_key,
+                "tags": 'vancouver',
+                "format": 'json',
+                "nojsoncallback": 1
+            },
+            "success": function (response) {
+                debugger;
+            }
+        });
+    </script>
 </body>
 </html>
