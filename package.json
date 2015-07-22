@@ -4,6 +4,7 @@
   "description": "Content Management System that connects to third party APIs like Facebook, Twitter, and Flickr",
   "main": "index.js",
   "scripts": {
+    "build": "./node_modules/.bin/gulp build",
     "harness": "node ./node_modules/tuxharness/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,6 +18,8 @@
   "author": "Dan BROOKS",
   "license": "MIT",
   "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-dust": "^2.0.0",
     "tuxharness": "^2.0.2"
   },
   "dependencies": {
