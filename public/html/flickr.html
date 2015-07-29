@@ -22,16 +22,6 @@
     </ul>
     
     <h3>Live demo</h3>
-    <script>
-        /*
-            Goal: Output every photo title in a bulletted list
-            1) Understand the JSON schema, find the photo titles
-            2) Determine the dot syntax path in the response to create a loop on an array
-            3) Loop through photos
-            4) Output titles to console
-            5) Stage code milestone to local Git
-        */
-    </script>
     <!-- Flickr API global variables -->
     <script src="../js/credentials.js"></script>
     <!-- jQuery library -->
@@ -41,7 +31,9 @@
         $.ajax({
             "url": '/flickr',
             "data": {
-                "tags": 'vancouver'
+                "lat": 49.282698,
+                "lon": -123.115358,
+                "radius": .25
             },
             "success": function (response) {
                 var photoHtml = "";

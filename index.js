@@ -44,7 +44,6 @@ server.route({
             data = {
                 "method": 'flickr.photos.search',
                 "api_key": credentials.flickr.api_key,
-                "tags": 'vancouver',
                 "format": 'json',
                 "nojsoncallback": 1
             },
@@ -52,6 +51,19 @@ server.route({
                 "uri": 'https://api.flickr.com/services/rest/',
                 "qs": data
             };
+
+        if (request.query && request.query.tags) { // Did HTML's jQuery AJAX pass the `tag` data?
+            options.qs.tags = request.query.tags;
+        }
+        if (request.query && request.query.lat) {
+            options.qs.lat = request.query.lat;
+        }
+        if (request.query && request.query.lon) {
+            options.qs.lon = request.query.lon;
+        }
+        if (request.query && request.query.radius) {
+            options.qs.radius = request.query.radius;
+        }
         
         httpRequest(options, function (error, response, body) {
             if (!error && response.statusCode == 200) {
