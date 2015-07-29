@@ -39,21 +39,14 @@
     <!-- Page specic code -->
     <script>
         $.ajax({
-            "url": 'https://api.flickr.com/services/rest/',
+            "url": '/flickr',
             "data": {
-                "method": 'flickr.photos.search',
-                "api_key": credentials.flickr.api_key,
-                "tags": 'vancouver',
-                "format": 'json',
-                "nojsoncallback": 1
+                "tags": 'vancouver'
             },
             "success": function (response) {
                 var photoHtml = "";
-                $.each(response.photos.photo, function (x, photo) {
-                    photoHtml += '<div><img src="';
-                    // https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
-                    photoHtml += "https://farm" + photo.farm + ".staticflickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + ".jpg";
-                    photoHtml += '">' + photo.title + '</div>';
+                $.each(response.photos, function (x, photoSrc) {
+                    photoHtml += '<div><img src="' + photoSrc + '"></div>';
                 });
                 $('body').append(photoHtml);
             }
