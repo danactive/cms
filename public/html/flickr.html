@@ -22,12 +22,25 @@
     </ul>
     
     <h3>Live demo</h3>
+    <!-- Slippy map container -->
+    <div id="mapBox" style="height: 400px;"></div>
     <!-- Flickr API global variables -->
     <script src="../js/credentials.js"></script>
     <!-- jQuery library -->
     <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <!-- Map Provider -->
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <!-- Abstraction library -->
+    <script src="http://mapstraction.com/mxn/build/latest/mxn.js?(googlev3,leaflet)" type="text/javascript"></script>
     <!-- Page specic code -->
     <script>
+        var map = new mxn.Mapstraction('mapBox', 'googlev3'); 
+        var latlon = new mxn.LatLonPoint(49.282698, -123.115358);
+        var pin = new mxn.Marker(latlon);
+        map.setCenterAndZoom(latlon, 16);
+
         $.ajax({
             "url": '/flickr',
             "data": {
@@ -40,7 +53,8 @@
                 $.each(response.photos, function (x, photoSrc) {
                     photoHtml += '<div><img src="' + photoSrc + '"></div>';
                 });
-                $('body').append(photoHtml);
+                pin.setInfoBubble(photoHtml);
+                map.addMarker(pin);
             }
         });
     </script>
