@@ -46,12 +46,15 @@
             "data": {
                 "lat": 49.282698,
                 "lon": -123.115358,
-                "radius": .25
+                "radius": .25,
+                "extras": 'geo',
+                "has_geo": 1
             },
             "success": function (response) {
+                //todo inclass: Change this one pin with many photos to many pins with one photo each
                 var photoHtml = "";
-                $.each(response.photos, function (x, photoSrc) {
-                    photoHtml += '<div><img src="' + photoSrc + '"></div>';
+                $.each(response.photos, function (x, photo) {
+                    photoHtml += '<div><img src="' + photo.photoSrc + '"></div>';
                 });
                 pin.setInfoBubble(photoHtml);
                 map.addMarker(pin);

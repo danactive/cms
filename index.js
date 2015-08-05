@@ -1,18 +1,22 @@
 var Hapi = require('hapi');
 
 // Input[] should be Flickr's photo details including server, secret, farm
-// Output[] is the full JPG web address
+// Output[] is an object with `photoSrc` a full JPG web address, `lat` and `lon`
 var createJpgPath = function (photos) {
     var i,
         photo,
-        photoSrc = [],
+        output = [],
         len = photos.length;
     for (i = 0; i < len; i++) {
         photo = photos[i];
         // https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
-        photoSrc.push("https://farm" + photo.farm + ".staticflickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + ".jpg");
+        output.push({
+            "photoSrc": "https://farm" + photo.farm + ".staticflickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + ".jpg",
+            "lat": photo.latitude,
+            "lon": photo.longitude
+        });
     }
-    return photoSrc;
+    return output;
 };
 
 // Create a server with a host and port
@@ -52,22 +56,18 @@ server.route({
                 "qs": data
             };
 
-        if (request.query && request.query.tags) { // Did HTML's jQuery AJAX pass the `tag` data?
-            options.qs.tags = request.query.tags;
-        }
-        if (request.query && request.query.lat) {
-            options.qs.lat = request.query.lat;
-        }
-        if (request.query && request.query.lon) {
-            options.qs.lon = request.query.lon;
-        }
-        if (request.query && request.query.radius) {
-            options.qs.radius = request.query.radius;
+        // Check arguments send from client request, then pass through to Flickr HTTP Request
+        var field,
+            fields = ["tags", "lat", "lon", "radius", "has_geo", "extras"];
+        for (var i=0, len=fields.length; i < len; i++) {
+            field = fields[i];
+            if (request.query && request.query[field]) {
+                options.qs[field] = request.query[field];
+            }
         }
         
         httpRequest(options, function (error, response, body) {
             if (!error && response.statusCode == 200) {
-                console.log('flickr content coming soon') // CLI
                 var output = {
                     "photos": createJpgPath(JSON.parse(body).photos.photo)
                 };
