@@ -20,7 +20,8 @@ var formatTwitterDate = function (stamp) {
 	return (dayDiff === 0 && lessThanDay) ||
 		(dayDiff === 1 && "Yesterday") ||
 		(dayDiff < 7 && dayDiff.toString() + " days ago") ||
-		(dayDiff < 31 && Math.ceil( dayDiff / 7 ).toString() + " weeks ago");
+		(dayDiff < 31 && Math.ceil( dayDiff / 7 ).toString() + " weeks ago") ||
+		(dayDiff >= 31 && Math.ceil( dayDiff / 31 ).toString() + " months ago");
 };
 
 module.exports = {"formatTwitterDate": formatTwitterDate};
