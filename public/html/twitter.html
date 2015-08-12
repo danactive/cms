@@ -36,7 +36,7 @@
             "success": function (response) {
                 var html = "<ul>";
                 $.each(response.tweets, function () {
-                    html += "<li>" + this.status + "</li>";
+                    html += "<li><i>" + this.date + "</i> " + this.status + "</li>";
                 });
                 html += "</ul>";
 

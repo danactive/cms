@@ -105,7 +105,8 @@ server.route({
     path:'/twitter', 
     handler: function (request, reply) {
         var Twit = require('twit'),
-            secrets = require("./src/js/secrets.js");
+            secrets = require("./src/js/secrets.js"),
+            util = require("./src/js/util.js");
  
         var T = new Twit(secrets.twitter);
         
@@ -114,7 +115,8 @@ server.route({
             // introducing map method on array https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/map
             data = data.map(function (tweet) {
                 return {
-                    "status": tweet.text
+                    "status": tweet.text,
+                    "date": util.formatTwitterDate(tweet.created_at)
                 };
             });
             reply({"tweets": data })
