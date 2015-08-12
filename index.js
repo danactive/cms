@@ -100,6 +100,21 @@ server.route({
     }
 });
 
+server.route({
+    method: 'GET',
+    path:'/twitter', 
+    handler: function (request, reply) {
+        var Twit = require('twit'),
+            secrets = require("./src/js/secrets.js");
+ 
+        var T = new Twit(secrets.twitter);
+        
+        T.get('statuses/user_timeline', { screen_name: 'vanarts' }, function(err, data, response) {
+          reply({"tweets": data })
+        })
+    }
+});
+
 // Start the server
 server.start(function () {
     console.log('Server running at:', server.info.uri);

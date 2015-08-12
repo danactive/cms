@@ -25,7 +25,8 @@
   "dependencies": {
     "dustjs-linkedin": "^2.7.2",
     "hapi": "^8.8.0",
-    "request": "^2.60.0"
+    "request": "^2.60.0",
+    "twit": "^2.1.0"
   },
   "repository": {
     "type": "git",
