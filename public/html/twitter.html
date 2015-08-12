@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>2twitterApi.html</title>
+</head>
+
+<body>
+
+	<h1>Twitter</h1>
+    <h2>API</h2>
+    
+    <p>As a user, I want to see a Twitter timeline feed of VanArts.</p>
+
+    <p>Acceptance Criteria: Display the tweet text</p>
+    
+    <h3>Technologies</h3>
+    <ul>
+    	<li><a href="https://dev.twitter.com/docs">Twitter JS API</a></li>
+        <li><a href="https://www.npmjs.com/package/twit">Twitter API client for node</a></li>
+        <li>hapi.js</li>
+        <li>node.js</li>
+    	<li>jQuery AJAX</li>
+    	<li>jQuery</li>
+    	<li>JavaScript</li>
+    </ul>
+    
+    <h3>Live demo</h3>
+    <!-- jQuery library -->
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <!-- Page specic code -->
+    <script>
+        $.ajax({
+            "url": '/twitter',
+            "data": {},
+            "success": function (response) {
+                var html = "<ul>";
+                $.each(response.tweets, function () {
+                    html += "<li>" + this.status + "</li>";
+                });
+                html += "</ul>";
+
+                $("body").append(html);
+            }
+        });
+    </script
+</body>
+</html>

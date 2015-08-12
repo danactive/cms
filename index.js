@@ -110,7 +110,14 @@ server.route({
         var T = new Twit(secrets.twitter);
         
         T.get('statuses/user_timeline', { screen_name: 'vanarts' }, function(err, data, response) {
-          reply({"tweets": data })
+            // thin response, only display tweet text
+            // introducing map method on array https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/map
+            data = data.map(function (tweet) {
+                return {
+                    "status": tweet.text
+                };
+            });
+            reply({"tweets": data })
         })
     }
 });
